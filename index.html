@@ -1124,6 +1124,16 @@
             updateNavbarBg(); // Update background when menu is closed
         });
     });
+
+    // --- GA4: 聯盟/外部連結點擊追蹤（送出完整網址，方便報表看 1102）---
+    document.querySelectorAll('a[href*="affiliateCode"], a[href^="https://www.inya7"], a[href^="https://www.burma777"], a[href^="https://www.mmkburma"], a[href^="https://www.marhar777"], a[href^="https://www.popa777"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            var url = this.getAttribute('href') || '';
+            if (typeof gtag === 'function') {
+                gtag('event', 'affiliate_click', { link_url: url });
+            }
+        });
+    });
     </script>
 </body>
 </html>

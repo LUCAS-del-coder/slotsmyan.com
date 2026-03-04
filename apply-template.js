@@ -86,6 +86,18 @@ function main() {
   }
   const processed = Math.min(HTML_FILES.length, allHtml.length);
 
+  // sitemap.xml、robots.txt：套用 {{SITE_URL}} 後輸出
+  const extraFiles = ['sitemap.xml', 'robots.txt'];
+  for (const file of extraFiles) {
+    const srcPath = path.join(SRC_DIR, file);
+    const outPath = path.join(OUTPUT_DIR, file);
+    if (fs.existsSync(srcPath)) {
+      const content = fs.readFileSync(srcPath, 'utf8');
+      fs.writeFileSync(outPath, applyReplacements(content, config), 'utf8');
+      console.log('已輸出: ' + file);
+    }
+  }
+
   // 複製 config 到 output 以便日後查閱
   fs.copyFileSync(CONFIG_FILE, path.join(OUTPUT_DIR, 'template-config.json'));
   console.log('\n完成。客製化網站已輸出至 output 資料夾。');

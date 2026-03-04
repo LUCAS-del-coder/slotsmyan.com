@@ -28,4 +28,4 @@ User-agent: MSNBot
 Disallow: 
 User-agent: *
 Disallow: /cdn-cgi/
-Sitemap: https://myanslots.com/sitemap.xml
+Sitemap: {{SITE_URL}}/sitemap.xml
